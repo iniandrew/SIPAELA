@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="768.0" prefWidth="330.0" styleClass="sidebar">
+         <children>
+            <Label fx:id="lblAppName" alignment="CENTER" layoutX="-1.0" layoutY="21.0" prefHeight="153.0" prefWidth="335.0" text="SIP AE LA" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="48.0" />
+               </font>
+            </Label>
+            <VBox layoutX="-3.0" layoutY="199.0" prefHeight="420.0" prefWidth="340.0">
+               <children>
+                  <Button alignment="BASELINE_LEFT" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="330.0" styleClass="btn" text="Data Parkir">
+                     <VBox.margin>
+                        <Insets bottom="16.0" top="8.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="16.0" left="42.0" top="16.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="330.0" styleClass="btn" text="Data Pegawai">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="16.0" left="42.0" top="16.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="330.0" styleClass="btn" text="Tipe Kendaraan">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="16.0" left="42.0" top="16.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="321.0" styleClass="btn" text="Pengguna">
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="16.0" left="42.0" top="16.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="321.0" styleClass="btn" text="Keluar">
+                     <padding>
+                        <Insets bottom="16.0" left="42.0" top="16.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Label layoutX="606.0" layoutY="731.0" text="SIP AE LA - Sistem Informasi Parkir Arek IT Telkom Surabaya" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

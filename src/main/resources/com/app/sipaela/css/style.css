@@ -1,0 +1,27 @@
+.root {
+    -fx-background-image: url("../img/main-bg.png");
+    -fx-background-color: #00BBF0;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1366 768;
+    -fx-background-position: center center;
+}
+
+.sidebar {
+    -fx-background-color: #00204A;
+}
+
+.btn {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #00204A;
+    -fx-font-family: Arial;
+    -fx-font-size: 18;
+}
+
+.btn:pressed {
+    -fx-background-color: #0d77c8;
+}
+
+.btn:hover, .btn:focused {
+    -fx-background-color: #1e8fe8;
+}
+

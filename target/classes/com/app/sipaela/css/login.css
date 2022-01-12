@@ -1,0 +1,30 @@
+.root {
+    -fx-background-image: url("../img/login-bg.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1366 768;
+    -fx-background-position: center center;
+}
+
+.form-container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 32;
+}
+
+.form-text {
+    -fx-text-fill: #00204A;
+}
+
+.form-control {
+    -fx-background-radius: 24;
+    -fx-background-color: #EFFBFF;
+}
+
+.btn {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 24;
+    -fx-background-color: #005792;
+}
+
+.btn:pressed {
+    -fx-background-color: #0d77c8;
+}

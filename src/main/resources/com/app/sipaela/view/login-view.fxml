@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" styleClass="root" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.LoginController">
+   <children>
+      <Label fx:id="lblAppName" layoutX="32.0" layoutY="19.0" prefHeight="93.0" prefWidth="560.0" text="SIP AE LA" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="64.0" />
+         </font>
+      </Label>
+      <Pane layoutX="801.0" layoutY="86.0" prefHeight="586.0" prefWidth="462.0" styleClass="form-container">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="62.0" prefHeight="67.0" prefWidth="465.0" styleClass="form-text" text="Login">
+               <font>
+                  <Font name="Arial Bold" size="48.0" />
+               </font>
+            </Label>
+            <VBox layoutX="30.0" layoutY="161.0" prefHeight="362.0" prefWidth="403.0">
+               <children>
+                  <Label prefHeight="29.0" prefWidth="403.0" styleClass="form-text" text="Username ">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="370.0" promptText="Masukan Username" styleClass="form-control">
+                     <VBox.margin>
+                        <Insets bottom="16.0" top="8.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label prefHeight="29.0" prefWidth="403.0" styleClass="form-text" text="Password">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <PasswordField fx:id="passwordField" maxHeight="50.0" maxWidth="370.0" minHeight="50.0" minWidth="370.0" prefHeight="50.0" prefWidth="370.0" promptText="Masukan Password" styleClass="form-control">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Button fx:id="btnLogin" maxHeight="50.0" maxWidth="370.0" minHeight="50.0" minWidth="370.0" mnemonicParsing="false" onAction="#onButtonLoginClicked" prefHeight="50.0" prefWidth="370.0" styleClass="btn" text="Login">
+                     <VBox.margin>
+                        <Insets top="16.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+         </padding>
+      </Pane>
+      <Label fx:id="lblAppDescription" layoutX="19.0" layoutY="701.0" prefHeight="50.0" prefWidth="455.0" text="Sistem Informasi Parkiran Arek IT Telkom Surabaya" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="358.0" fitWidth="329.0" layoutX="23.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-parking.png" />
+         </image>
+      </ImageView>
+   </children>
+   <padding>
+      <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+   </padding>
+</AnchorPane>

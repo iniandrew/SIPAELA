@@ -1,11 +1,7 @@
 module com.app.sipaela {
     requires javafx.controls;
     requires javafx.fxml;
-
-    requires com.dlsc.formsfx;
-    requires validatorfx;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens com.app.sipaela to javafx.fxml;
     exports com.app.sipaela;
