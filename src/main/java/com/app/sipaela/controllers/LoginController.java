@@ -2,6 +2,7 @@ package com.app.sipaela.controllers;
 
 import com.app.sipaela.MainApplication;
 import com.app.sipaela.helpers.Connection;
+import com.app.sipaela.helpers.Helpers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +11,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -32,6 +33,7 @@ public class LoginController implements Initializable {
     private PasswordField passwordField;
     @FXML
     private Button btnLogin;
+    private Helpers helpers = new Helpers();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,7 +57,7 @@ public class LoginController implements Initializable {
         String password = passwordField.getText();
 
         if (username.equals("") || password.equals("")) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Isian Username / Password harus diisi!");
+            helpers.showAlert(Alert.AlertType.ERROR, "Error", "Isian Username / Password harus diisi!");
         }
 
         String query = "SELECT * FROM users WHERE username = (?) AND password = (?)";
@@ -65,24 +67,24 @@ public class LoginController implements Initializable {
         ResultSet result = statement.executeQuery();
 
         while (result.next()) {
-            if (result.getString(5).equals("admin")) {// get column jabatan
-                System.out.println("Hello admin!");
-                Stage stage = (Stage) btnLogin.getScene().getWindow();
-                Parent root = FXMLLoader.load(MainApplication.class.getResource("view/admin/dashboard-view.fxml"));
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+            if (!result.wasNull()) {
+                if (result.getString(5).equals("admin")) {// get column jabatan
+                    Stage stage = (Stage) btnLogin.getScene().getWindow();
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("view/admin/main-view.fxml")));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    Stage stage = (Stage) btnLogin.getScene().getWindow();
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("view/employee/main-view.fxml")));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            } else {
+                helpers.showAlert(Alert.AlertType.INFORMATION, "Gagal", "Login Gagal");
             }
         }
         statement.close();
-    }
-
-    // untuk menampilkan alert
-    private static void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

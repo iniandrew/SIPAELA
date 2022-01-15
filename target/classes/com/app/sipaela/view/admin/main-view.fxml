@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.MainController">
+   <children>
+      <Pane prefHeight="768.0" prefWidth="330.0" styleClass="sidebar">
+         <children>
+            <Label fx:id="lblAppName" alignment="CENTER" layoutX="-1.0" layoutY="12.0" prefHeight="153.0" prefWidth="335.0" text="SIP AE LA" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="48.0" />
+               </font>
+            </Label>
+            <VBox layoutX="-3.0" layoutY="172.0" prefHeight="420.0" prefWidth="340.0">
+               <children>
+                  <Button fx:id="btnDataParkir" alignment="BASELINE_LEFT" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Data Parkir">
+                     <VBox.margin>
+                        <Insets bottom="8.0" top="8.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="18.0" left="42.0" top="18.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnDataPegawai" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Data Pegawai">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="18.0" left="42.0" top="18.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnTipeKendaraan" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Tipe Kendaraan">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="18.0" left="42.0" top="18.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnPengguna" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Pengguna">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="18.0" left="42.0" top="18.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnLogout" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Keluar">
+                     <padding>
+                        <Insets bottom="18.0" left="42.0" top="18.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Label fx:id="lblFooter" layoutX="606.0" layoutY="731.0" text="SIP AE LA - Sistem Informasi Parkir Arek IT Telkom Surabaya" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="tvUserName" fill="WHITE" layoutX="387.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Halo, Administrator" wrappingWidth="497.7366027832031">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="tvCurrentTimestamp" fill="WHITE" layoutX="918.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13 Januari 2022" textAlignment="RIGHT" wrappingWidth="404.4960021972656">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
+      <BorderPane fx:id="mainLayout" layoutX="330.0" layoutY="70.0" prefHeight="643.0" prefWidth="1040.0" />
+   </children>
+</AnchorPane>

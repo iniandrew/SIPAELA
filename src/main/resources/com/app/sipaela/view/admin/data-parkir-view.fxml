@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1040.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutX="64.0" layoutY="205.0" prefHeight="361.0" prefWidth="914.0" styleClass="card">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="307.0" minHeight="10.0" prefHeight="307.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView prefHeight="287.0" prefWidth="914.0" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn editable="false" prefWidth="69.0" text="No" />
+                <TableColumn editable="false" prefWidth="166.0" sortable="false" text="Nomor Polisi" />
+                  <TableColumn editable="false" prefWidth="131.0" sortable="false" text="Tipe Kendaraan" />
+                  <TableColumn editable="false" prefWidth="124.0" sortable="false" text="Kategori" />
+                  <TableColumn editable="false" prefWidth="133.0" text="Biaya" />
+                  <TableColumn editable="false" prefWidth="146.0" text="Waktu Masuk" />
+                  <TableColumn editable="false" prefWidth="146.0" text="Waktu Keluar" />
+              </columns>
+            </TableView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="card-title" text="Data Parkir" wrappingWidth="915.21630859375">
+               <GridPane.margin>
+                  <Insets left="16.0" />
+               </GridPane.margin>
+            </Text>
+         </children>
+      </GridPane>
+      <VBox layoutX="64.0" layoutY="55.0" prefHeight="100.0" prefWidth="425.0" styleClass="card">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="card-title" text="Total Kendaraan Parkir Hari Ini" wrappingWidth="392.0">
+               <VBox.margin>
+                  <Insets bottom="16.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="50 Kendaraan" wrappingWidth="372.0986328125" />
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="553.0" layoutY="55.0" prefHeight="100.0" prefWidth="425.0" styleClass="card">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="card-title" text="Total Pendapatan Parkir Hari Ini" wrappingWidth="372.0">
+               <VBox.margin>
+                  <Insets bottom="16.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rp 50.000" wrappingWidth="362.5283203125" />
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
