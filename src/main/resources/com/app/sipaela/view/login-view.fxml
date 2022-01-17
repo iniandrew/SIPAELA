@@ -60,7 +60,7 @@
                         <Insets bottom="16.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <Button fx:id="btnLogin" maxHeight="50.0" maxWidth="370.0" minHeight="50.0" minWidth="370.0" mnemonicParsing="false" onAction="#onButtonLoginClicked" prefHeight="50.0" prefWidth="370.0" styleClass="btn" text="Login">
+                  <Button fx:id="btnLogin" maxHeight="50.0" maxWidth="370.0" minHeight="50.0" minWidth="370.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="370.0" styleClass="btn" text="Login">
                      <VBox.margin>
                         <Insets top="16.0" />
                      </VBox.margin>

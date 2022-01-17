@@ -3,6 +3,7 @@ package com.app.sipaela.controllers.admin;
 import com.app.sipaela.MainApplication;
 import com.app.sipaela.controllers.MainController;
 import com.app.sipaela.helpers.Connection;
+import com.app.sipaela.helpers.Helpers;
 import com.app.sipaela.models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -25,6 +27,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -64,6 +67,9 @@ public class UserShowController implements Initializable {
 
     private int id;
     private String name, username, password, jabatan, status, createdAt;
+    private Helpers helpers = new Helpers();
+    private User user;
+    private int selectedId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,9 +83,36 @@ public class UserShowController implements Initializable {
         }
     }
 
+    // untuk mendapatkan id user yang sedang di click oleh pengguna
+    public void onTableUsersClicked(MouseEvent mouseEvent) {
+        user = tableUsers.getSelectionModel().getSelectedItem();
+        selectedId = user.idProperty().getValue();
+    }
+
     private void setupActionButton() {
         btnAdd.setOnAction(actionEvent -> {
             showModalView("view/admin/users/add.fxml", actionEvent, "Tambah Pengguna Baru");
+            tableUsers.refresh();
+            setupTable();
+        });
+
+        btnDelete.setOnAction(actionEvent -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Konfirmasi Hapus Data");
+            alert.setContentText("Apakah anda yakin menghapus data tersebut ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    removeExistingUser();
+                    tableUsers.refresh();
+                    tableUsers.getSelectionModel().clearSelection();
+                    setupTable();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                helpers.showAlert(Alert.AlertType.INFORMATION, "Info", "Dibatalkan");
+            }
         });
     }
 
@@ -133,6 +166,17 @@ public class UserShowController implements Initializable {
             tvCountUsersInactive.setText(resultUserInActive.getString(1) + " Pengguna");
         }
         statementUserInActive.close();
+    }
+
+    private void removeExistingUser() throws SQLException {
+        String query = "DELETE FROM users WHERE id = (?)";
+        PreparedStatement statement = Connection.doConnect().prepareStatement(query);
+        statement.setInt(1, selectedId);
+        if (statement.executeUpdate() == 1) {
+            helpers.showAlert(Alert.AlertType.INFORMATION, "Sukses", "Data Berhasil di Hapus!");
+        } else {
+            helpers.showAlert(Alert.AlertType.INFORMATION, "Gagal", "Data gagal di Hapus!");
+        }
     }
 
     public ObservableList<User> loadData() throws Exception {

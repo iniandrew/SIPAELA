@@ -48,10 +48,6 @@ public class LoginController implements Initializable {
         });
     }
 
-    public void onButtonLoginClicked(ActionEvent actionEvent) {
-
-    }
-
     private void login() throws SQLException, IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();

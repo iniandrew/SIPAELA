@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -48,23 +47,15 @@ public class UserAddController implements Initializable {
 
     private ObservableList<String> data = FXCollections.observableArrayList("Administrator", "Pegawai");
 
-    Helpers helpers = new Helpers();
-    String status, jabatan;
+    private Helpers helpers = new Helpers();
+    private String status, jabatan;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fieldPosition.setItems(data);
+        setupActionButton();
+        setupToggleGroup();
 
-        ToggleGroup toggleGroup = new ToggleGroup();
-        fieldOptionActive.setToggleGroup(toggleGroup);
-        fieldOptionInActive.setToggleGroup(toggleGroup);
-
-        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
-                status = String.valueOf(observableValue.getValue());
-            }
-        });
 
         fieldPosition.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -72,11 +63,33 @@ public class UserAddController implements Initializable {
                 jabatan = (observableValue.getValue().equals("Administrator") ? "admin" : "pegawai");
             }
         });
+    }
 
+    private void clearAllField() {
+        fieldName.clear();
+        fieldUsername.clear();
+        fieldPassword.clear();
+    }
+
+    private void setupToggleGroup() {
+        ToggleGroup toggleGroup = new ToggleGroup();
+        fieldOptionActive.setToggleGroup(toggleGroup);
+        fieldOptionInActive.setToggleGroup(toggleGroup);
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
+                RadioButton selectedValue = (RadioButton)t1.getToggleGroup().getSelectedToggle();
+                status = selectedValue.getText();
+            }
+        });
+    }
+
+    private void setupActionButton() {
         btnSubmit.setOnAction(actionEvent -> {
             try {
+                validation();
                 addUser();
-                helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Pengguna Baru Berhasil di Tambahkan");
+                clearAllField();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -86,6 +99,12 @@ public class UserAddController implements Initializable {
         });
     }
 
+    private void validation() {
+        if (fieldName.getText().isEmpty() || fieldUsername.getText().isEmpty() || fieldPassword.getText().isEmpty()) {
+            helpers.showAlert(Alert.AlertType.ERROR, "Error!", "Tidak boleh ada data yang kosong!");
+        }
+    }
+
     private void addUser() throws SQLException {
         String query = "INSERT INTO users (nama, username, password, jabatan, status) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
@@ -93,14 +112,13 @@ public class UserAddController implements Initializable {
         statement.setString(2, fieldUsername.getText());
         statement.setString(3, fieldPassword.getText());
         statement.setString(4, jabatan);
-        statement.setBoolean(5, Objects.equals(status, "Aktif"));
+        statement.setBoolean(5, status.equals("Aktif"));
 
         if (statement.executeUpdate() == 1) {
-            Helpers helpers = new Helpers();
             helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Pengguna Baru Berhasil di Tambahkan");
+        } else {
+            helpers.showAlert(Alert.AlertType.ERROR, "Gagal!", "Pengguna Baru Gagal di Tambahkan");
         }
         statement.close();
     }
-
-
 }

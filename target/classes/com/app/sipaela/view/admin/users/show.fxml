@@ -41,7 +41,7 @@
       </VBox>
       <Pane layoutX="63.0" layoutY="193.0" prefHeight="391.0" prefWidth="914.0" styleClass="card">
          <children>
-            <TableView fx:id="tableUsers" layoutY="66.0" prefHeight="273.0" prefWidth="914.0">
+            <TableView fx:id="tableUsers" layoutY="66.0" onMouseClicked="#onTableUsersClicked" prefHeight="273.0" prefWidth="914.0">
               <columns>
                 <TableColumn fx:id="columnIdD" editable="false" prefWidth="69.0" resizable="false" text="No" />
                 <TableColumn fx:id="columnName" editable="false" prefWidth="166.0" resizable="false" sortable="false" text="Nama" />
@@ -54,24 +54,20 @@
             </TableView>
             <HBox layoutX="14.0" layoutY="6.0" prefHeight="53.0" prefWidth="372.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="card-title" text="Data Pengguna">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="card-title" text="Data Pengguna" wrappingWidth="166.8046875">
                      <HBox.margin>
                         <Insets right="16.0" />
                      </HBox.margin>
                   </Text>
-                  <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="btn" text="Tambah Pengguna">
-                     <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </padding>
-                  </Button>
+                  <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="btn" text="Tambah Pengguna" />
                </children>
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </HBox>
-            <HBox layoutX="649.0" layoutY="333.0" prefHeight="53.0" prefWidth="258.0">
+            <HBox layoutX="642.0" layoutY="339.0" prefHeight="43.0" prefWidth="258.0">
                <children>
-                  <Button fx:id="btnEdit" mnemonicParsing="false" prefHeight="37.0" prefWidth="104.0" styleClass="btn" text="Ubah">
+                  <Button fx:id="btnEdit" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" styleClass="btn" text="Ubah">
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
@@ -79,7 +75,7 @@
                         <Insets right="16.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnDelete" mnemonicParsing="false" prefHeight="33.0" prefWidth="112.0" styleClass="btn" text="Hapus">
+                  <Button fx:id="btnDelete" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" styleClass="btn" text="Hapus">
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
@@ -89,17 +85,17 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </HBox>
-            <HBox layoutX="629.0" layoutY="4.0" prefHeight="57.0" prefWidth="268.0">
+            <HBox layoutX="592.0" layoutY="10.0" prefHeight="57.0" prefWidth="308.0">
                <children>
-                  <TextField fx:id="fieldSearch" prefHeight="30.0" prefWidth="161.0">
+                  <TextField fx:id="fieldSearch" prefHeight="31.0" prefWidth="189.0" promptText="Masukan Kata Kunci" styleClass="form-control">
                      <HBox.margin>
                         <Insets right="16.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Cari" />
+                  <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" styleClass="btn" text="Cari" />
                </children>
                <padding>
-                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </HBox>
          </children>
