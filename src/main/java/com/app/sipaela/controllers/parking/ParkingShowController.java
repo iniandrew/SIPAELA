@@ -37,7 +37,7 @@ public class ParkingShowController implements Initializable {
     private TableColumn<Parking, Integer> columnId;
 
     @FXML
-    private TableColumn<Parking, String> columnKategori, columnNomorPolisi, columnTipeKendaraan, columnWaktuKeluar, columnWaktuMasuk;
+    private TableColumn<Parking, String> columnKategori, columnNomorPolisi, columnTipeKendaraan, columnWaktuKeluar, columnWaktuMasuk, columnStatus;
 
     @FXML
     private TextField fieldSearch;
@@ -53,7 +53,7 @@ public class ParkingShowController implements Initializable {
 
     private Parking parking;
     private int id, biaya;
-    private String nopol, category, type, waktuKeluar, waktuMasuk;
+    private String nopol, category, type, waktuKeluar, waktuMasuk, status;
     private Helpers helpers = new Helpers();
 
     @Override
@@ -75,6 +75,7 @@ public class ParkingShowController implements Initializable {
         columnBiaya.setCellValueFactory(data -> data.getValue().biayaProperty().asObject());
         columnWaktuMasuk.setCellValueFactory(data -> data.getValue().waktu_masukProperty());
         columnWaktuKeluar.setCellValueFactory(data -> data.getValue().waktu_keluarProperty());
+        columnStatus.setCellValueFactory(data -> data.getValue().statusProperty());
 
         try {
             tableParking.setItems(loadData());
@@ -116,8 +117,9 @@ public class ParkingShowController implements Initializable {
             type = result.getString(4);
             biaya = result.getInt(5);
             waktuMasuk = result.getString(6);
-            waktuKeluar = result.getString(7) == null ? "-" : result.getString(7) ;
-            parkings.add(new Parking(id, nopol, category, type, biaya, waktuMasuk, waktuKeluar));
+            waktuKeluar = result.getString(7) == null ? "-" : result.getString(7);
+            status = result.getString(8).equals("IN") ? "Masuk" : "Keluar";
+            parkings.add(new Parking(id, nopol, category, type, biaya, waktuMasuk, waktuKeluar, status));
         }
         statement.close();
         return parkings;

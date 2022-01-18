@@ -43,13 +43,14 @@
          <children>
             <TableView fx:id="tableParking" layoutY="66.0" prefHeight="327.0" prefWidth="914.0">
                <columns>
-                  <TableColumn fx:id="columnId" editable="false" prefWidth="69.0" resizable="false" text="ID" />
-                  <TableColumn fx:id="columnNomorPolisi" editable="false" prefWidth="155.97821044921875" resizable="false" sortable="false" text="Nomor Polisi" />
-                  <TableColumn fx:id="columnKategori" editable="false" prefWidth="136.39944458007812" resizable="false" sortable="false" text="Kategori" />
-                  <TableColumn fx:id="columnTipeKendaraan" editable="false" prefWidth="131.6005859375" resizable="false" sortable="false" text="Tipe Kendaraan" />
-                  <TableColumn fx:id="columnBiaya" editable="false" prefWidth="131.01959228515625" resizable="false" sortable="false" text="Biaya" />
-                  <TableColumn fx:id="columnWaktuMasuk" editable="false" prefWidth="147.01739501953125" resizable="false" sortable="false" text="Waktu Masuk" />
-                  <TableColumn fx:id="columnWaktuKeluar" editable="false" prefWidth="146.98260498046875" resizable="false" text="Waktu Keluar" />
+                  <TableColumn fx:id="columnId" editable="false" prefWidth="64.78479766845703" resizable="false" text="ID" />
+                  <TableColumn fx:id="columnNomorPolisi" editable="false" prefWidth="156.37619018554688" resizable="false" sortable="false" text="Nomor Polisi" />
+                  <TableColumn fx:id="columnKategori" editable="false" prefWidth="115.88150024414062" resizable="false" sortable="false" text="Kategori" />
+                  <TableColumn fx:id="columnTipeKendaraan" editable="false" prefWidth="111.32257080078125" resizable="false" sortable="false" text="Tipe Kendaraan" />
+                  <TableColumn fx:id="columnBiaya" editable="false" prefWidth="107.17742919921875" resizable="false" sortable="false" text="Biaya" />
+                  <TableColumn fx:id="columnWaktuMasuk" editable="false" prefWidth="122.8118896484375" resizable="false" sortable="false" text="Waktu Masuk" />
+                  <TableColumn fx:id="columnWaktuKeluar" editable="false" minWidth="0.0" prefWidth="123.81195068359375" resizable="false" text="Waktu Keluar" />
+                  <TableColumn fx:id="columnStatus" prefWidth="115.68798828125" text="Status" />
                </columns>
             </TableView>
             <HBox layoutX="14.0" layoutY="7.0" prefHeight="53.0" prefWidth="228.0">

@@ -10,9 +10,9 @@ import javafx.beans.property.StringProperty;
  */
 public class Parking {
     private IntegerProperty id, biaya;
-    private StringProperty nopol, category, type, waktu_masuk, waktu_keluar;
+    private StringProperty nopol, category, type, waktu_masuk, waktu_keluar, status;
 
-    public Parking(int id, String nopol, String category, String type, int biaya, String waktu_masuk, String waktu_keluar) {
+    public Parking(int id, String nopol, String category, String type, int biaya, String waktu_masuk, String waktu_keluar, String status) {
         this.id = new SimpleIntegerProperty(id);
         this.biaya = new SimpleIntegerProperty(biaya);
         this.nopol = new SimpleStringProperty(nopol);
@@ -20,6 +20,7 @@ public class Parking {
         this.type = new SimpleStringProperty(type);
         this.waktu_masuk = new SimpleStringProperty(waktu_masuk);
         this.waktu_keluar = new SimpleStringProperty(waktu_keluar);
+        this.status = new SimpleStringProperty(status);
     }
 
     public IntegerProperty idProperty() {
@@ -48,5 +49,9 @@ public class Parking {
 
     public StringProperty waktu_keluarProperty() {
         return waktu_keluar;
+    }
+
+    public StringProperty statusProperty() {
+        return status;
     }
 }

@@ -67,7 +67,7 @@ public class ParkingAddOutController implements Initializable {
     }
 
     private void searchDataParkir() throws SQLException {
-        String query = "SELECT * FROM parking WHERE nopol LIKE" + "'%" + fieldNomorPolisiKendaraan.getText() + "%'" + "AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
+        String query = "SELECT * FROM parking WHERE nopol LIKE" + "'%" + fieldNomorPolisiKendaraan.getText() + "%'" + "AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'" + "AND status = 'IN'";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         ResultSet result = statement.executeQuery();
 
