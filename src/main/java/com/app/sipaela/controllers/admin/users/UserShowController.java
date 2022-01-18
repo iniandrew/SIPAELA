@@ -1,7 +1,6 @@
-package com.app.sipaela.controllers.admin;
+package com.app.sipaela.controllers.admin.users;
 
 import com.app.sipaela.MainApplication;
-import com.app.sipaela.controllers.MainController;
 import com.app.sipaela.helpers.Connection;
 import com.app.sipaela.helpers.Helpers;
 import com.app.sipaela.models.User;
@@ -16,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,7 +24,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -179,7 +176,7 @@ public class UserShowController implements Initializable {
         }
     }
 
-    public ObservableList<User> loadData() throws Exception {
+    private ObservableList<User> loadData() throws SQLException {
         String query = "SELECT * FROM users";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         ResultSet result = statement.executeQuery();

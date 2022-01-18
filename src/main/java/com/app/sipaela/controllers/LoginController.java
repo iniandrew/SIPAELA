@@ -1,13 +1,13 @@
 package com.app.sipaela.controllers;
 
 import com.app.sipaela.MainApplication;
+import com.app.sipaela.controllers.admin.AdminController;
+import com.app.sipaela.controllers.employee.EmployeeController;
 import com.app.sipaela.helpers.Connection;
 import com.app.sipaela.helpers.Helpers;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -17,7 +17,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -63,22 +62,31 @@ public class LoginController implements Initializable {
         ResultSet result = statement.executeQuery();
 
         while (result.next()) {
-            if (!result.wasNull()) {
-                if (result.getString(5).equals("admin")) {// get column jabatan
-                    Stage stage = (Stage) btnLogin.getScene().getWindow();
-                    Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("view/admin/main-view.fxml")));
-                    Scene scene = new Scene(root);
+            String name = result.getString(2);
+            String uname = result.getString(3);
+            String passwd = result.getString(4);
+            String jabatan = result.getString(5);
+            boolean isActive = result.getBoolean(6);
+
+            if (isActive) {
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
+                FXMLLoader loader;
+                if (jabatan.equals("admin")) {
+                    loader = new FXMLLoader(MainApplication.class.getResource("view/admin/main-view.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    AdminController adminController = loader.getController();
+                    adminController.setupUserName(name);
                     stage.setScene(scene);
-                    stage.show();
                 } else {
-                    Stage stage = (Stage) btnLogin.getScene().getWindow();
-                    Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("view/employee/main-view.fxml")));
-                    Scene scene = new Scene(root);
+                    loader = new FXMLLoader(MainApplication.class.getResource("view/employee/main-view.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    EmployeeController employeeController = loader.getController();
+                    employeeController.setupUserName(name);
                     stage.setScene(scene);
-                    stage.show();
                 }
+                stage.show();
             } else {
-                helpers.showAlert(Alert.AlertType.INFORMATION, "Gagal", "Login Gagal");
+                helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Akun " + name + " tidak aktif!");
             }
         }
         statement.close();

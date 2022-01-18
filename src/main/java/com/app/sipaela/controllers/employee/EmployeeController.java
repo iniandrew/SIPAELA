@@ -1,9 +1,11 @@
-package com.app.sipaela.controllers;
+package com.app.sipaela.controllers.employee;
 
 import com.app.sipaela.MainApplication;
+import com.app.sipaela.helpers.Helpers;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,27 +24,23 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.util.*;
 
 /**
- * Created by Chrisdion Andrew on 13/01/22 12.18
+ * Created by Chrisdion Andrew on 18/01/22 00.14
  */
-public class MainController implements Initializable {
+public class EmployeeController implements Initializable {
     @FXML
     private Button btnDataParkir;
-
-    @FXML
-    private Button btnDataPegawai;
 
     @FXML
     private Button btnLogout;
 
     @FXML
-    private Button btnPengguna;
+    private Button btnParkirKeluar;
 
     @FXML
-    private Button btnTipeKendaraan;
+    private Button btnParkirMasuk;
 
     @FXML
     private Label lblAppName;
@@ -51,7 +49,7 @@ public class MainController implements Initializable {
     private Label lblFooter;
 
     @FXML
-    public BorderPane mainLayout;
+    private BorderPane mainLayout;
 
     @FXML
     private Text tvCurrentTimestamp;
@@ -59,34 +57,47 @@ public class MainController implements Initializable {
     @FXML
     private Text tvUserName;
 
-    // String userName;
+    private String name;
+    private Helpers helpers = new Helpers();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        getCurrentDate();
+        setupActionButton();
+        setupCurrentDatetime();
+
+        Platform.runLater(() -> {
+            tvUserName.setText("Halo, " + name);
+        });
 
         try {
-            loadView("view/admin/data-parkir-view.fxml");
+            loadView("view/parking/show.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    private void setupActionButton() {
         btnDataParkir.setOnAction(actionEvent -> {
             try {
-                loadView("view/admin/data-parkir-view.fxml");
+                loadView("view/parking/show.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-
-        btnPengguna.setOnAction(actionEvent -> {
+        btnParkirMasuk.setOnAction(actionEvent -> {
             try {
-                loadView("view/admin/users/show.fxml");
+                loadView("view/parking/add-in.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-
+        btnParkirKeluar.setOnAction(actionEvent -> {
+            try {
+                loadView("view/parking/add-out.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         btnLogout.setOnAction(actionEvent -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Konfirmasi Logout");
@@ -107,8 +118,8 @@ public class MainController implements Initializable {
         });
     }
 
-    private void getCurrentDate() {
-        final DateFormat format = DateFormat.getInstance();
+    // untuk mendapatkan tanggal dan waktu hari ini
+    private void setupCurrentDatetime() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -116,23 +127,21 @@ public class MainController implements Initializable {
                 final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        final Calendar calendar = Calendar.getInstance();
-                        tvCurrentTimestamp.setText(format.format(calendar.getTime()));
+                        tvCurrentTimestamp.setText(helpers.getCurrentDatetime());
                     }
                 }));
                 timeline.setCycleCount(Animation.INDEFINITE);
                 timeline.play();
-
             }
         }, 0, 2000);
     }
 
-//    protected void setupUserName(String name) {
-//        this.userName = name;
-//    }
+    public void setupUserName(String name) {
+        this.name = name;
+    }
 
     // Fungsi untuk memanggil tampilan
-    public void loadView(String filePath) throws IOException {
+    private void loadView(String filePath) throws IOException {
         try {
             Parent parent = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource(filePath)));
             mainLayout.setCenter(parent);

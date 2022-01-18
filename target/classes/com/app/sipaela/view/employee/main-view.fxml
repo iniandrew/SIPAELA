@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.admin.AdminController">
+<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.employee.EmployeeController">
    <children>
       <Pane prefHeight="768.0" prefWidth="330.0" styleClass="sidebar">
          <children>
@@ -32,7 +32,7 @@
                         <Insets bottom="18.0" left="42.0" top="18.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btnPengguna" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Data Pengguna">
+                  <Button fx:id="btnParkirMasuk" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Parkir Masuk">
                      <VBox.margin>
                         <Insets bottom="8.0" />
                      </VBox.margin>
@@ -40,7 +40,7 @@
                         <Insets bottom="18.0" left="42.0" top="18.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btnTipeKendaraan" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Pengaturan">
+                  <Button fx:id="btnParkirKeluar" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="69.0" prefWidth="333.0" styleClass="sidebar-btn" text="Parkir Keluar">
                      <VBox.margin>
                         <Insets bottom="8.0" />
                      </VBox.margin>
@@ -62,7 +62,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <Text fx:id="tvUserName" fill="WHITE" layoutX="387.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Halo, Administrator" wrappingWidth="497.7366027832031">
+      <Text fx:id="tvUserName" fill="WHITE" layoutX="387.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Halo, Pegawai" wrappingWidth="497.7366027832031">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

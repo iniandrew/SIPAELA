@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="630.0" maxWidth="1040.0" minHeight="630.0" minWidth="1040.0" prefHeight="630.0" prefWidth="1040.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.admin.UserShowController">
+<AnchorPane maxHeight="630.0" maxWidth="1040.0" minHeight="630.0" minWidth="1040.0" prefHeight="630.0" prefWidth="1040.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.admin.users.UserShowController">
    <children>
       <VBox layoutX="64.0" layoutY="55.0" prefHeight="100.0" prefWidth="425.0" styleClass="card">
          <children>

@@ -27,48 +27,24 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name.get();
-    }
-
     public StringProperty nameProperty() {
         return name;
-    }
-
-    public String getUsername() {
-        return username.get();
     }
 
     public StringProperty usernameProperty() {
         return username;
     }
 
-    public String getPassword() {
-        return password.get();
-    }
-
     public StringProperty passwordProperty() {
         return password;
-    }
-
-    public String getJabatan() {
-        return jabatan.get();
     }
 
     public StringProperty jabatanProperty() {
         return jabatan;
     }
 
-    public String getStatus() {
-        return status.get();
-    }
-
     public StringProperty statusProperty() {
         return status;
-    }
-
-    public String getCreated_at() {
-        return created_at.get();
     }
 
     public StringProperty created_atProperty() {

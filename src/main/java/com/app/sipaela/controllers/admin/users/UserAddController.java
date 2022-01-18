@@ -1,4 +1,4 @@
-package com.app.sipaela.controllers.admin;
+package com.app.sipaela.controllers.admin.users;
 
 import com.app.sipaela.helpers.Connection;
 import com.app.sipaela.helpers.Helpers;
@@ -45,14 +45,14 @@ public class UserAddController implements Initializable {
     @FXML
     private TextField fieldUsername;
 
-    private ObservableList<String> data = FXCollections.observableArrayList("Administrator", "Pegawai");
+    private ObservableList<String> positions = FXCollections.observableArrayList("Administrator", "Pegawai");
 
     private Helpers helpers = new Helpers();
     private String status, jabatan;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fieldPosition.setItems(data);
+        fieldPosition.setItems(positions);
         setupActionButton();
         setupToggleGroup();
 
