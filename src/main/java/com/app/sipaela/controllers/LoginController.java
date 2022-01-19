@@ -51,7 +51,8 @@ public class LoginController implements Initializable {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if (username.equals("") || password.equals("")) {
+        // validasi form
+        if (username.isEmpty() || password.isEmpty()) {
             helpers.showAlert(Alert.AlertType.ERROR, "Error", "Isian Username / Password harus diisi!");
         }
 
@@ -61,10 +62,8 @@ public class LoginController implements Initializable {
         statement.setString(2, password);
         ResultSet result = statement.executeQuery();
 
-        while (result.next()) {
+        if (result.next()) {
             String name = result.getString(2);
-            String uname = result.getString(3);
-            String passwd = result.getString(4);
             String jabatan = result.getString(5);
             boolean isActive = result.getBoolean(6);
 
@@ -76,18 +75,22 @@ public class LoginController implements Initializable {
                     Scene scene = new Scene(loader.load());
                     AdminController adminController = loader.getController();
                     adminController.setupUserName(name);
+                    stage.setTitle("SIP AE LA - Admin");
                     stage.setScene(scene);
                 } else {
                     loader = new FXMLLoader(MainApplication.class.getResource("view/employee/main-view.fxml"));
                     Scene scene = new Scene(loader.load());
                     EmployeeController employeeController = loader.getController();
                     employeeController.setupUserName(name);
+                    stage.setTitle("SIP AE LA - Pegawai");
                     stage.setScene(scene);
                 }
                 stage.show();
             } else {
                 helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Akun " + name + " tidak aktif!");
             }
+        } else {
+            helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username / Password Salah!");
         }
         statement.close();
     }
