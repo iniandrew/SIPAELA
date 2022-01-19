@@ -81,11 +81,12 @@ public class ParkingAddOutController implements Initializable {
     }
 
     private void submitParkingOut() throws SQLException {
-        String query = "UPDATE parking SET waktu_keluar = (?) WHERE nopol LIKE" + "'%" + fieldNomorPolisiKendaraan.getText() + "%'" + "AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
+        String query = "UPDATE parking SET waktu_keluar = (?), status = (?) WHERE nopol LIKE" + "'%" + fieldNomorPolisiKendaraan.getText() + "%'" + "AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         statement.setString(1, helpers.getCurrentDatetime());
+        statement.setString(2, "OUT");
         if (statement.executeUpdate() == 1) {
-            helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Data Parkir Berhasil di Tambahkan");
+            helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Data Parkir Keluar Berhasil di Tambahkan");
         } else {
             helpers.showAlert(Alert.AlertType.ERROR, "Gagal!", "Data Parkir Gagal di Tambahkan");
         }
