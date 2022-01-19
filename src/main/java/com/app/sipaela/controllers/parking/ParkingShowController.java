@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 /**
@@ -47,20 +48,22 @@ public class ParkingShowController implements Initializable {
     @FXML
     private Text tvTotalPendapatan;
 
-    private Parking parking;
     private int id, biaya;
     private String nopol, category, type, waktuKeluar, waktuMasuk, status;
     private Helpers helpers = new Helpers();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setupTable();
         try {
             getTotalParking();
             getTotalPendapatan();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        setupTable();
+        btnSearch.setOnAction(actionEvent -> {
+            setupTable();
+        });
     }
 
     private void setupTable() {
@@ -74,7 +77,11 @@ public class ParkingShowController implements Initializable {
         columnStatus.setCellValueFactory(data -> data.getValue().statusProperty());
 
         try {
-            tableParking.setItems(loadData());
+            if (fieldSearch.getText().isEmpty()) {
+                tableParking.setItems(loadData());
+            } else {
+                tableParking.setItems(loadDataFromUserInput());
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,7 +92,7 @@ public class ParkingShowController implements Initializable {
         PreparedStatement statement = Connection.doConnect().prepareStatement(totalParkingQuery);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
-            tvTotalKendaraan.setText(result.getString(1) + " Kendaraan");
+            tvTotalKendaraan.setText((result.getString(1) == null ? "0" : result.getString(1)) + " Kendaraan");
         }
         statement.close();
     }
@@ -95,13 +102,34 @@ public class ParkingShowController implements Initializable {
         PreparedStatement statement = Connection.doConnect().prepareStatement(totalPendapatanQuery);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
-            tvTotalPendapatan.setText("Rp " + result.getString(1));
+            tvTotalPendapatan.setText("Rp " + (result.getString(1) == null ? "0" : result.getString(1)) );
         }
         statement.close();
     }
 
     private ObservableList<Parking> loadData() throws SQLException {
-        String query = "SELECT * FROM parking WHERE  waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
+        String query = "SELECT * FROM parking WHERE waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
+        PreparedStatement statement = Connection.doConnect().prepareStatement(query);
+        ResultSet result = statement.executeQuery();
+        ObservableList<Parking> parkings = FXCollections.observableArrayList();
+
+        while (result.next()) {
+            id = result.getInt(1);
+            nopol = result.getString(2);
+            category = result.getString(3);
+            type = result.getString(4);
+            biaya = result.getInt(5);
+            waktuMasuk = result.getString(6);
+            waktuKeluar = result.getString(7) == null ? "-" : result.getString(7);
+            status = result.getString(8).equals("IN") ? "Masuk" : "Keluar";
+            parkings.add(new Parking(id, nopol, category, type, biaya, waktuMasuk, waktuKeluar, status));
+        }
+        statement.close();
+        return parkings;
+    }
+
+    private ObservableList<Parking> loadDataFromUserInput() throws SQLException {
+        String query = "SELECT * FROM parking WHERE nopol LIKE" + "'%" + fieldSearch.getText() + "%'" + "AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         ResultSet result = statement.executeQuery();
         ObservableList<Parking> parkings = FXCollections.observableArrayList();
