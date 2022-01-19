@@ -71,11 +71,13 @@ public class ParkingAddOutController implements Initializable {
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         ResultSet result = statement.executeQuery();
 
-        while (result.next()) {
+        if (result.next()) {
             fieldKategori.setText(result.getString(3));
             fieldTipeKendaraan.setText(result.getString(4));
             fieldBiaya.setText(result.getString(5));
             fieldWaktuMasuk.setText(result.getString(6));
+        } else {
+            helpers.showAlert(Alert.AlertType.ERROR, "Error!", "Data Parkir tidak ditemukan");
         }
         statement.close();
     }
