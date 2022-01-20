@@ -56,7 +56,6 @@ public class UserAddController implements Initializable {
         setupActionButton();
         setupToggleGroup();
 
-
         fieldPosition.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {

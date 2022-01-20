@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="630.0" maxWidth="1040.0" minHeight="630.0" minWidth="1040.0" prefHeight="630.0" prefWidth="1040.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.admin.employee.UserAddController">
+<AnchorPane maxHeight="630.0" maxWidth="1040.0" minHeight="630.0" minWidth="1040.0" prefHeight="630.0" prefWidth="1040.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.sipaela.controllers.admin.users.UserEditController">
    <children>
       <Pane layoutX="103.0" layoutY="89.0" prefHeight="440.0" prefWidth="834.0" styleClass="card">
          <children>

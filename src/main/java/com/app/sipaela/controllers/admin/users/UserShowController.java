@@ -95,6 +95,26 @@ public class UserShowController implements Initializable {
             setupTable();
         });
 
+        btnEdit.setOnAction(actionEvent -> {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("view/admin/users/edit.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(loader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            UserEditController userEditController = loader.getController();
+            userEditController.setUserId(selectedId);
+            stage.setTitle("SIP AE LA - Ubah Data Pengguna");
+            stage.setScene(scene);
+            stage.show();
+
+            // refresh tabel dengan data yang baru
+            tableUsers.refresh();
+            setupTable();
+        });
+
         btnDelete.setOnAction(actionEvent -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Konfirmasi Hapus Data");
