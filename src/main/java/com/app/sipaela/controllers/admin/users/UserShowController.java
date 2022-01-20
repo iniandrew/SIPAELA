@@ -70,14 +70,16 @@ public class UserShowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setupTable();
         setupActionButton();
-
         try {
             getUserStatus();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        setupTable();
+        btnSearch.setOnAction(actionEvent -> {
+            setupTable();
+        });
     }
 
     // untuk mendapatkan id user yang sedang di click oleh pengguna
@@ -139,7 +141,11 @@ public class UserShowController implements Initializable {
         columnCreatedAt.setCellValueFactory(data -> data.getValue().created_atProperty());
 
         try {
-            tableUsers.setItems(loadData());
+            if (fieldSearch.getText().isEmpty()) {
+                tableUsers.setItems(loadData());
+            } else {
+                tableUsers.setItems(loadDataFromUserInput());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,6 +197,27 @@ public class UserShowController implements Initializable {
             status = result.getBoolean(6) ? "Aktif" : "Tidak Aktif";
             createdAt = result.getString(7);
             users.add(new User(id, name, username, password, jabatan, status, createdAt));
+        }
+        statement.close();
+        return users;
+    }
+
+    private ObservableList<User> loadDataFromUserInput() throws SQLException {
+        String query = "SELECT * FROM users WHERE nama LIKE " + "'%" + fieldSearch.getText() + "%'";
+        PreparedStatement statement = Connection.doConnect().prepareStatement(query);
+        ResultSet result = statement.executeQuery();
+        ObservableList<User> users = FXCollections.observableArrayList();
+        if (result.next()) {
+            id = result.getInt(1);
+            name = result.getString(2);
+            username = result.getString(3);
+            password = result.getString(4);
+            jabatan = result.getString(5);
+            status = result.getBoolean(6) ? "Aktif" : "Tidak Aktif";
+            createdAt = result.getString(7);
+            users.add(new User(id, name, username, password, jabatan, status, createdAt));
+        } else {
+            helpers.showAlert(Alert.AlertType.INFORMATION, "Gagal", "Data yang dicari tidak ditemukan!");
         }
         statement.close();
         return users;
