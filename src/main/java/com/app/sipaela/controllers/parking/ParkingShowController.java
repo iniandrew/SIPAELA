@@ -3,6 +3,7 @@ package com.app.sipaela.controllers.parking;
 import com.app.sipaela.helpers.Connection;
 import com.app.sipaela.helpers.Helpers;
 import com.app.sipaela.models.Parking;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,6 +46,9 @@ public class ParkingShowController implements Initializable {
     private Text tvTotalKendaraan;
 
     @FXML
+    private Text tvQuota;
+
+    @FXML
     private Text tvTotalPendapatan;
 
     private int id, biaya;
@@ -53,6 +57,15 @@ public class ParkingShowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Platform.runLater(() -> {
+            try {
+                tvQuota.setText(helpers.getParkingQuota() + " Kendaraan");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
         try {
             getTotalParking();
             getTotalPendapatan();

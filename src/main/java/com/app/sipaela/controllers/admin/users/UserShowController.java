@@ -51,7 +51,7 @@ public class UserShowController implements Initializable {
     private TableColumn<User, Integer> columnIdD;
 
     @FXML
-    private TableColumn<User, String> columnName, columnUsername, columnPassword, columnJabatan, columnStatus, columnCreatedAt;
+    private TableColumn<User, String> columnName, columnUsername, columnPassword, columnStatus, columnCreatedAt;
 
     @FXML
     private TextField fieldSearch;
@@ -108,7 +108,7 @@ public class UserShowController implements Initializable {
             userEditController.setUserId(selectedId);
             stage.setTitle("SIP AE LA - Ubah Data Pengguna");
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
 
             // refresh tabel dengan data yang baru
             tableUsers.refresh();
@@ -156,7 +156,6 @@ public class UserShowController implements Initializable {
         columnName.setCellValueFactory(data -> data.getValue().nameProperty());
         columnUsername.setCellValueFactory(data -> data.getValue().usernameProperty());
         columnPassword.setCellValueFactory(data -> data.getValue().passwordProperty());
-        columnJabatan.setCellValueFactory(data -> data.getValue().jabatanProperty());
         columnStatus.setCellValueFactory(data -> data.getValue().statusProperty());
         columnCreatedAt.setCellValueFactory(data -> data.getValue().created_atProperty());
 
@@ -216,7 +215,7 @@ public class UserShowController implements Initializable {
             jabatan = result.getString(5);
             status = result.getBoolean(6) ? "Aktif" : "Tidak Aktif";
             createdAt = result.getString(7);
-            users.add(new User(id, name, username, password, jabatan, status, createdAt));
+            users.add(new User(id, name, username, password, status, createdAt));
         }
         statement.close();
         return users;
@@ -232,10 +231,9 @@ public class UserShowController implements Initializable {
             name = result.getString(2);
             username = result.getString(3);
             password = result.getString(4);
-            jabatan = result.getString(5);
             status = result.getBoolean(6) ? "Aktif" : "Tidak Aktif";
             createdAt = result.getString(7);
-            users.add(new User(id, name, username, password, jabatan, status, createdAt));
+            users.add(new User(id, name, username, password, status, createdAt));
         } else {
             helpers.showAlert(Alert.AlertType.INFORMATION, "Gagal", "Data yang dicari tidak ditemukan!");
         }

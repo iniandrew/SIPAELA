@@ -24,6 +24,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -38,13 +39,16 @@ public class AdminController implements Initializable {
     private Button btnLogout;
 
     @FXML
-    private Button btnPengguna;
+    private Button btnPegawai;
 
     @FXML
-    private Label lblAppName;
+    private Button btnSetting;
 
     @FXML
-    private Label lblFooter;
+    private Text tvAppName;
+
+    @FXML
+    private Text tvFooter;
 
     @FXML
     public BorderPane mainLayout;
@@ -64,6 +68,11 @@ public class AdminController implements Initializable {
         setupActionButton();
 
         Platform.runLater(() -> {
+            try {
+                tvAppName.setText(helpers.getAppName());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             tvUserName.setText("Halo, " + userName);
         });
 
@@ -83,9 +92,17 @@ public class AdminController implements Initializable {
             }
         });
 
-        btnPengguna.setOnAction(actionEvent -> {
+        btnPegawai.setOnAction(actionEvent -> {
             try {
                 loadView("view/admin/users/show.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        btnSetting.setOnAction(actionEvent -> {
+            try {
+                loadView("view/admin/setting.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -4,8 +4,6 @@ import com.app.sipaela.helpers.Connection;
 import com.app.sipaela.helpers.Helpers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -40,28 +38,15 @@ public class UserAddController implements Initializable {
     private PasswordField fieldPassword;
 
     @FXML
-    private ComboBox<String> fieldPosition;
-
-    @FXML
     private TextField fieldUsername;
-
-    private ObservableList<String> positions = FXCollections.observableArrayList("Administrator", "Pegawai");
 
     private Helpers helpers = new Helpers();
     private String status, jabatan;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fieldPosition.setItems(positions);
         setupActionButton();
         setupToggleGroup();
-
-        fieldPosition.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                jabatan = (observableValue.getValue().equals("Administrator") ? "admin" : "pegawai");
-            }
-        });
     }
 
     private void clearAllField() {

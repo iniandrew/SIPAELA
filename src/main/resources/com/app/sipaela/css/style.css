@@ -80,6 +80,7 @@
 .table-view .column-header,
 .table-view .column-header,
 .table-view .column-header-background  {
+    -fx-background-color: #badae8;
     -fx-stroke: transparent;
     -fx-size:50;
     -fx-alignment: CENTER ;

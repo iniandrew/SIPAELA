@@ -9,12 +9,11 @@ public class User {
     private IntegerProperty id;
     private StringProperty name, username, password, jabatan, status,created_at;
 
-    public User(int id, String name, String username, String password, String jabatan, String status, String created_at) {
+    public User(int id, String name, String username, String password, String status, String created_at) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
-        this.jabatan = new SimpleStringProperty(jabatan);
         this.status = new SimpleStringProperty(status);
         this.created_at = new SimpleStringProperty(created_at);
     }
@@ -37,10 +36,6 @@ public class User {
 
     public StringProperty passwordProperty() {
         return password;
-    }
-
-    public StringProperty jabatanProperty() {
-        return jabatan;
     }
 
     public StringProperty statusProperty() {

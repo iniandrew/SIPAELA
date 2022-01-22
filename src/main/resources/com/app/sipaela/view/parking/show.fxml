@@ -20,7 +20,21 @@
                   <Insets bottom="16.0" />
                </VBox.margin>
             </Text>
-            <Text fx:id="tvTotalKendaraan" strokeType="OUTSIDE" strokeWidth="0.0" text="50 Kendaraan" wrappingWidth="372.0986328125" />
+            <HBox prefHeight="39.0" prefWidth="200.0">
+               <children>
+                  <Text fx:id="tvTotalKendaraan" strokeType="OUTSIDE" strokeWidth="0.0" text="50 Kendaraan" wrappingWidth="86.0986328125">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="tvQuota" strokeType="OUTSIDE" strokeWidth="0.0" text="250 Kendaraan" wrappingWidth="171.21630859375" />
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
@@ -41,7 +55,7 @@
       </VBox>
       <Pane layoutX="73.0" layoutY="203.0" prefHeight="391.0" prefWidth="914.0" styleClass="card">
          <children>
-            <TableView fx:id="tableParking" layoutY="66.0" prefHeight="327.0" prefWidth="914.0">
+            <TableView fx:id="tableParking" layoutY="66.0" prefHeight="291.0" prefWidth="914.0">
                <columns>
                   <TableColumn fx:id="columnId" editable="false" prefWidth="64.78479766845703" resizable="false" text="ID" />
                   <TableColumn fx:id="columnNomorPolisi" editable="false" prefWidth="156.37619018554688" resizable="false" sortable="false" text="Nomor Polisi" />

@@ -41,15 +41,11 @@ public class UserEditController implements Initializable {
     private PasswordField fieldPassword;
 
     @FXML
-    private ComboBox<String> fieldPosition;
-
-    @FXML
     private TextField fieldUsername;
 
     private int userId;
-    private String status, jabatan;
+    private String status;
     private Helpers helpers = new Helpers();
-    private ObservableList<String> positions = FXCollections.observableArrayList("Administrator", "Pegawai");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,13 +60,6 @@ public class UserEditController implements Initializable {
 
         setupActionButton();
         setupToggleGroup();
-        fieldPosition.setItems(positions);
-        fieldPosition.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                jabatan = (observableValue.getValue().equals("Administrator") ? "admin" : "pegawai");
-            }
-        });
     }
 
     private void setupToggleGroup() {
@@ -122,12 +111,6 @@ public class UserEditController implements Initializable {
             fieldUsername.setText(result.getString(3));
             fieldPassword.setText(result.getString(4));
 
-            if (result.getString(5).equals("admin")) {
-                fieldPosition.setValue("Administrator");
-            } else {
-                fieldPosition.setValue("Pegawai");
-            }
-
             if (result.getBoolean(6)) {
                 fieldOptionActive.setSelected(true);
             } else {
@@ -139,14 +122,13 @@ public class UserEditController implements Initializable {
     }
 
     private void updateExistingUser() throws SQLException {
-        String query = "UPDATE users SET nama=(?), username=(?), password=(?), jabatan=(?), status = (?) WHERE id = (?)";
+        String query = "UPDATE users SET nama=(?), username=(?), password=(?), status = (?) WHERE id = (?)";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         statement.setString(1, fieldName.getText());
         statement.setString(2, fieldUsername.getText());
         statement.setString(3, fieldPassword.getText());
-        statement.setString(4, jabatan);
-        statement.setBoolean(5, status.equals("Aktif"));
-        statement.setInt(6, userId);
+        statement.setBoolean(4, status.equals("Aktif"));
+        statement.setInt(5, userId);
 
         if (statement.executeUpdate() == 1) {
             helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Pengguna Berhasil di perbarui");

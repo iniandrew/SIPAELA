@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -51,8 +52,13 @@ public class ParkingAddInController implements Initializable {
         fieldBiaya.setDisable(true);
         btnSubmit.setOnAction(actionEvent -> {
             validation();
+
             try {
-                addParkingIn();
+                if (getParkingCount() >= helpers.getParkingQuota()) {
+                    helpers.showAlert(Alert.AlertType.ERROR, "Error!", "Kouta Parkir sudah penuh!");
+                } else {
+                    addParkingIn();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -114,5 +120,17 @@ public class ParkingAddInController implements Initializable {
             helpers.showAlert(Alert.AlertType.ERROR, "Gagal!", "Data Parkir Gagal di Tambahkan");
         }
         statement.close();
+    }
+
+    private int getParkingCount() throws SQLException {
+        String query = "SELECT COUNT(id) FROM parking WHERE status = (?) AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
+        PreparedStatement statement = Connection.doConnect().prepareStatement(query);
+        statement.setString(1, "IN");
+        ResultSet result = statement.executeQuery();
+        int count = 0;
+        while (result.next()) {
+            count = result.getInt(1);
+        }
+        return count;
     }
 }

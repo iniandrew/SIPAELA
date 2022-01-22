@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
             if (isActive) {
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 FXMLLoader loader;
-                if (jabatan.equals("admin")) {
+                if (jabatan.equals("ADMIN")) {
                     loader = new FXMLLoader(MainApplication.class.getResource("view/admin/main-view.fxml"));
                     Scene scene = new Scene(loader.load());
                     AdminController adminController = loader.getController();
