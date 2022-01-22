@@ -41,7 +41,7 @@ public class UserAddController implements Initializable {
     private TextField fieldUsername;
 
     private Helpers helpers = new Helpers();
-    private String status, jabatan;
+    private String status;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,9 +71,13 @@ public class UserAddController implements Initializable {
     private void setupActionButton() {
         btnSubmit.setOnAction(actionEvent -> {
             try {
-                validation();
-                addUser();
-                clearAllField();
+                if (fieldName.getText().isEmpty() || fieldUsername.getText().isEmpty() || fieldPassword.getText().isEmpty()) {
+                    helpers.showAlert(Alert.AlertType.ERROR, "Error!", "Tidak boleh ada data yang kosong!");
+                } else {
+                    addUser();
+                    clearAllField();
+                    ((Stage) btnSubmit.getScene().getWindow()).close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -83,20 +87,13 @@ public class UserAddController implements Initializable {
         });
     }
 
-    private void validation() {
-        if (fieldName.getText().isEmpty() || fieldUsername.getText().isEmpty() || fieldPassword.getText().isEmpty()) {
-            helpers.showAlert(Alert.AlertType.ERROR, "Error!", "Tidak boleh ada data yang kosong!");
-        }
-    }
-
     private void addUser() throws SQLException {
-        String query = "INSERT INTO users (nama, username, password, jabatan, status) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (nama, username, password, status) VALUES (?, ?, ?, ?)";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         statement.setString(1, fieldName.getText());
         statement.setString(2, fieldUsername.getText());
         statement.setString(3, fieldPassword.getText());
-        statement.setString(4, jabatan);
-        statement.setBoolean(5, status.equals("Aktif"));
+        statement.setBoolean(4, status.equals("Aktif"));
 
         if (statement.executeUpdate() == 1) {
             helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Pengguna Baru Berhasil di Tambahkan");
