@@ -88,12 +88,13 @@ public class UserAddController implements Initializable {
     }
 
     private void addUser() throws SQLException {
-        String query = "INSERT INTO users (nama, username, password, status) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO users (nama, username, password, jabatan,status) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = Connection.doConnect().prepareStatement(query);
         statement.setString(1, fieldName.getText());
         statement.setString(2, fieldUsername.getText());
         statement.setString(3, fieldPassword.getText());
-        statement.setBoolean(4, status.equals("Aktif"));
+        statement.setString(4, "PEGAWAI");
+        statement.setBoolean(5, status.equals("Aktif"));
 
         if (statement.executeUpdate() == 1) {
             helpers.showAlert(Alert.AlertType.INFORMATION, "Berhasil!", "Pengguna Baru Berhasil di Tambahkan");
