@@ -100,8 +100,9 @@ public class ParkingShowController implements Initializable {
     }
 
     private void getTotalParking() throws SQLException {
-        String totalParkingQuery = "SELECT COUNT(id) FROM parking WHERE waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
+        String totalParkingQuery = "SELECT COUNT(id) FROM parking WHERE status=(?) AND waktu_masuk LIKE " + "'%" + helpers.getCurrentDate() + "%'";
         PreparedStatement statement = Connection.doConnect().prepareStatement(totalParkingQuery);
+        statement.setString(1, "IN");
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             tvTotalKendaraan.setText((result.getString(1) == null ? "0" : result.getString(1)) + " Kendaraan");
