@@ -52,12 +52,12 @@ public class ParkingAddInController implements Initializable {
         fieldBiaya.setDisable(true);
         btnSubmit.setOnAction(actionEvent -> {
             validation();
-
             try {
                 if (getParkingCount() >= helpers.getParkingQuota()) {
                     helpers.showAlert(Alert.AlertType.ERROR, "Error!", "Kouta Parkir sudah penuh!");
                 } else {
                     addParkingIn();
+                    clearField();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -99,6 +99,11 @@ public class ParkingAddInController implements Initializable {
         } else {
             fieldBiaya.setText("Rp " + 0);
         }
+    }
+
+    private void clearField() {
+        fieldNomorPolisiKendaraan.clear();
+        fieldBiaya.clear();
     }
 
     private void validation() {
