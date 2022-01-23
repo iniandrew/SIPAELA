@@ -90,7 +90,7 @@ public class UserShowController implements Initializable {
 
     private void setupActionButton() {
         btnAdd.setOnAction(actionEvent -> {
-            showModalView("view/admin/users/add.fxml", actionEvent, "Tambah Pengguna Baru");
+            showModalView("view/admin/users/add.fxml", actionEvent, "Tambah Pegawai Baru");
             tableUsers.refresh();
             setupTable();
         });
@@ -106,7 +106,7 @@ public class UserShowController implements Initializable {
             }
             UserEditController userEditController = loader.getController();
             userEditController.setUserId(selectedId);
-            stage.setTitle("SIP AE LA - Ubah Data Pengguna");
+            stage.setTitle("SIP AE LA - Ubah Data Pegawai");
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -176,7 +176,7 @@ public class UserShowController implements Initializable {
         PreparedStatement statementUserActive = Connection.doConnect().prepareStatement(userActiveQuery);
         ResultSet resultUserActive = statementUserActive.executeQuery();
         while (resultUserActive.next()) {
-            tvCountUsersActive.setText(resultUserActive.getString(1) + " Pengguna");
+            tvCountUsersActive.setText(resultUserActive.getString(1) + " Pegawai");
         }
         statementUserActive.close();
 
@@ -185,7 +185,7 @@ public class UserShowController implements Initializable {
         PreparedStatement statementUserInActive = Connection.doConnect().prepareStatement(userInActiveQuery);
         ResultSet resultUserInActive = statementUserInActive.executeQuery();
         while (resultUserInActive.next()) {
-            tvCountUsersInactive.setText(resultUserInActive.getString(1) + " Pengguna");
+            tvCountUsersInactive.setText(resultUserInActive.getString(1) + " Pegawai");
         }
         statementUserInActive.close();
     }

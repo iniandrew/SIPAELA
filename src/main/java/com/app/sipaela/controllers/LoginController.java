@@ -54,44 +54,44 @@ public class LoginController implements Initializable {
         // validasi form
         if (username.isEmpty() || password.isEmpty()) {
             helpers.showAlert(Alert.AlertType.ERROR, "Error", "Isian Username / Password harus diisi!");
-        }
-
-        String query = "SELECT * FROM users WHERE username = (?) AND password = (?)";
-        PreparedStatement statement = Connection.doConnect().prepareStatement(query);
-        statement.setString(1, username);
-        statement.setString(2, password);
-        ResultSet result = statement.executeQuery();
-
-        if (result.next()) {
-            String name = result.getString(2);
-            String jabatan = result.getString(5);
-            boolean isActive = result.getBoolean(6);
-
-            if (isActive) {
-                Stage stage = (Stage) btnLogin.getScene().getWindow();
-                FXMLLoader loader;
-                if (jabatan.equals("ADMIN")) {
-                    loader = new FXMLLoader(MainApplication.class.getResource("view/admin/main-view.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    AdminController adminController = loader.getController();
-                    adminController.setupUserName(name);
-                    stage.setTitle("SIP AE LA - Admin");
-                    stage.setScene(scene);
-                } else {
-                    loader = new FXMLLoader(MainApplication.class.getResource("view/employee/main-view.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    EmployeeController employeeController = loader.getController();
-                    employeeController.setupUserName(name);
-                    stage.setTitle("SIP AE LA - Pegawai");
-                    stage.setScene(scene);
-                }
-                stage.show();
-            } else {
-                helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Akun " + name + " tidak aktif!");
-            }
         } else {
-            helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username / Password Salah!");
+            String query = "SELECT * FROM users WHERE username = (?) AND password = (?)";
+            PreparedStatement statement = Connection.doConnect().prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                String name = result.getString(2);
+                String jabatan = result.getString(5);
+                boolean isActive = result.getBoolean(6);
+
+                if (isActive) {
+                    Stage stage = (Stage) btnLogin.getScene().getWindow();
+                    FXMLLoader loader;
+                    if (jabatan.equals("ADMIN")) {
+                        loader = new FXMLLoader(MainApplication.class.getResource("view/admin/main-view.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        AdminController adminController = loader.getController();
+                        adminController.setupUserName(name);
+                        stage.setTitle("SIP AE LA - Admin");
+                        stage.setScene(scene);
+                    } else {
+                        loader = new FXMLLoader(MainApplication.class.getResource("view/employee/main-view.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        EmployeeController employeeController = loader.getController();
+                        employeeController.setupUserName(name);
+                        stage.setTitle("SIP AE LA - Pegawai");
+                        stage.setScene(scene);
+                    }
+                    stage.show();
+                } else {
+                    helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Akun " + name + " tidak aktif!");
+                }
+            } else {
+                helpers.showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username / Password Salah!");
+            }
+            statement.close();
         }
-        statement.close();
     }
 }
